@@ -6,11 +6,15 @@ class App extends Component {
 
   state = {
     currentDeckId: null,
-    drawnCards: null
+    drawnCards: [],
+    outOfCards: false
   }
 
   createDeck = () => {
-    this.setState({drawnCards: null})
+    this.setState({
+      drawnCards: [],
+      outOfCards: false
+    })
     fetch('http://localhost:3000/api/v1/decks', {
       method: 'POST',
       headers: {
@@ -79,70 +83,65 @@ class App extends Component {
   }
 
   drawCards = () => {
-    this.setState({drawnCards: null})
+    this.setState({drawnCards: []})
     fetch(`http://localhost:3000/api/v1/decks/${this.state.currentDeckId}/draw`)
     .then(response => response.json())
-    .then(parsedResponse => this.setState({drawnCards: parsedResponse}))
+    .then(parsedResponse => {
+      if (!parsedResponse.length) {
+        this.setState({outOfCards: true})
+      }
+      else {
+        setTimeout(() => this.setState({drawnCards: [...this.state.drawnCards, parsedResponse[0]]}), 50)
+        setTimeout(() => this.setState({drawnCards: [...this.state.drawnCards, parsedResponse[1]]}), 100)
+        setTimeout(() => this.setState({drawnCards: [...this.state.drawnCards, parsedResponse[2]]}), 150)
+        setTimeout(() => this.setState({drawnCards: [...this.state.drawnCards, parsedResponse[3]]}), 200)
+        setTimeout(() => this.setState({drawnCards: [...this.state.drawnCards, parsedResponse[4]]}), 250)
+      }
+    })
   }
 
   conditionalAnimationRender = () => {
-    if (this.state.drawnCards) {
-      if (this.state.drawnCards.length === 5) {
-        return (
-          <>
-            <img onClick={this.drawCards} id='dealer-gif' src={require('./images/draw-cards.gif')} alt='card'/>
-            <span>
-              <img id='speech-bubble' src={require('./images/speech-bubble-icon.png')} alt='speech' />
-              <p>Click me to draw five new cards.</p>
-            </span>
-          </>
-        )
-      }
-      else {
-        return (
-          <>
-            <img onClick={this.createDeck} id='dealer-gif' src={require('./images/all-the-money.gif')} alt='card'/>
-            <span>
-              <img id='speech-bubble' src={require('./images/speech-bubble-icon.png')} alt='speech' />
-              <p>You're out of cards! Click me to deal a new deck.</p>
-            </span>
-          </>
-        )
-      }
-    }
-    else if (this.state.currentDeckId) {
+    if (!this.state.currentDeckId) {
       return (
         <>
-          <img onClick={this.drawCards} id='dealer-gif' src={require('./images/draw-cards.gif')} alt='card'/>
-          <span>
-            <img id='speech-bubble' src={require('./images/speech-bubble-icon.png')} alt='speech' />
-            <p>Click me to draw five new cards.</p>
-          </span>
+          <img id='dealer-gif' src={require('./images/deal-cards.gif')} alt='card'/>
+            <img id='speech-bubble' src={require('./images/square-speech-bubble.png')} alt='speech' />
+            <p>CLICK BELOW TO DEAL A NEW DECK OF CARDS.</p>
+          <button onClick={this.createDeck}></button>
+        </>
+      )
+    }
+    else if (!this.state.outOfCards) {
+      return (
+        <>
+          <img id='dealer-gif' src={require('./images/draw-cards.gif')} alt='card'/>
+            <img id='speech-bubble' src={require('./images/square-speech-bubble.png')} alt='speech' />
+            <p>CLICK BELOW TO DRAW FIVE CARDS.</p>
+          <button onClick={this.drawCards}></button>
         </>
       )
     }
     else {
       return (
         <>
-          <img onClick={this.createDeck} id='dealer-gif' src={require('./images/deal-cards.gif')} alt='card'/>
-          <span>
-            <img id='speech-bubble' src={require('./images/speech-bubble-icon.png')} alt='speech' />
-            <p>Click me to deal a new deck of cards.</p>
-          </span>
+          <img id='dealer-gif' src={require('./images/all-the-money.gif')} alt='card'/>
+          <img id='speech-bubble' src={require('./images/square-speech-bubble.png')} alt='speech' />
+          <p>YOU'RE OUT OF CARDS! CLICK BELOW TO DEAL A NEW DECK.</p>
+          <button onClick={this.createDeck}></button>
         </>
       )
     }
   }
 
   conditionalCardRender = () => {
-    if (this.state.drawnCards && this.state.drawnCards.length === 5) {
+    if (this.state.drawnCards.length > 0) {
       return (
         <div className='card-grid-container'>
           {this.state.drawnCards.map(card => <Card key={card.code} card={card} />)}
         </div>
       )
     }
-    else if (this.state.currentDeckId && !this.state.drawnCards) {
+    else if (this.state.currentDeckId && !this.state.outOfCards) {
       return (
         <img id='card-back' src={require('./images/card-back.jpg')} alt='card-back'/>
       )
