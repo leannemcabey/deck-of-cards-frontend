@@ -27,10 +27,6 @@ body {
   margin-left: 170px;
 }
 
-/* #dealer-gif:hover {
-  cursor: pointer;
-} */
-
 #speech-bubble {
   height: 180px;
   width: 180px;
@@ -59,7 +55,7 @@ button {
   border-radius: 100%;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5), 0 3px 10px 0 rgba(0,0,0,0.8);
   border: solid 2px grey;
-  margin-top: 0px;
+  margin-top: 20px;
 }
 
 button:hover {
@@ -69,11 +65,6 @@ button:hover {
 
 button:focus {
   outline: none;
-}
-
-#main-div button {
-  margin-top: 20px;
-  margin-bottom: 20px;
 }
 
 #card-back {
