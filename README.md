@@ -1,6 +1,6 @@
 # Deck of Cards
 
-Deck of Cards is an app to create a standard deck of cards and draw from cards at a time from that deck.
+Deck of Cards is an app to create a standard deck of cards and draw five cards at a time from that deck.
 
 This application utilizes a Rails backend API, which can be found [here](https://github.com/leannemcabey/deck-of-cards-backend).
 
