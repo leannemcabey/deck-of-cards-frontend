@@ -1,33 +1,119 @@
-.App {
+body {
+  background-color: rgb(238,240,241);
+}
+
+#main-div {
+  background-color: green;
+  max-width: 1200px;
+  min-width: 1200px;
+  max-height: 750px;
+  min-height: 750px;
+  margin: auto;
   text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  font-family: 'Lato', sans-serif;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+#top-banner {
+  background-color: white;
+  height: 330px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+#dealer-gif {
+  height: 300px;
+  width: 300px;
+  margin-top: 30px;
+  margin-left: 170px;
+}
+
+#dealer-gif:hover {
+  cursor: pointer;
+}
+
+#speech-bubble {
+  height: 180px;
+  width: 180px;
+  position: relative;
+  top: -140px;
+  left: -50px;
+}
+
+span p {
+  width: 150px;
+  position: relative;
+  top: -300px;
+  left: 710px;
+  color: black;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+#main-div button {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+#card-back {
+  margin-top: 50px;
+  border-radius: 5%;
+}
+
+.card-grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+  grid-column-gap: 0px;
+  margin: auto;
+}
+
+.card-grid-item {
+  height: 300px;
+  width: 200px;
+  background-color: white;
+  margin: auto;
+  border-radius: 10px;
+  border: solid black 1px;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.5), 0 6px 20px 0 rgba(0,0,0,0.8);
+}
+
+.details-grid-container {
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: 20% 60% 20%;
+  color:black
+}
+
+.details-grid-container h3 {
+  margin: 5px auto 1px auto;
+}
+
+.black {
+  color: black;
+}
+
+.red {
+  color: red;
+}
+
+.left img {
+  width: 20px;
+  height: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.center img {
+  width: 100px;
+  height: 100px;
+  margin: 70% auto auto auto;
+}
+
+.flip {
+  transform: rotate(180deg);
+}
+
+.flip img {
+  width: 20px;
+  height: 20px;
+  margin-left: auto;
+  margin-right: auto;
 }
