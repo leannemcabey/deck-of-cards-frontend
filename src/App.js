@@ -100,13 +100,11 @@ class App extends Component {
     })
   }
 
-  conditionalAnimationRender = () => {
+  conditionalMessageRender = () => {
     if (!this.state.currentDeckId) {
       return (
         <>
-          <img id='dealer-gif' src={require('./images/deal-cards.gif')} alt='card'/>
-            <img id='speech-bubble' src={require('./images/square-speech-bubble.png')} alt='speech' />
-            <p>CLICK BELOW TO DEAL A NEW DECK OF CARDS.</p>
+          <p>CLICK MY MAGICAL GLOWING CARD TO DEAL A NEW DECK OF CARDS.</p>
           <button onClick={this.createDeck}></button>
         </>
       )
@@ -114,9 +112,7 @@ class App extends Component {
     else if (!this.state.outOfCards) {
       return (
         <>
-          <img id='dealer-gif' src={require('./images/draw-cards.gif')} alt='card'/>
-            <img id='speech-bubble' src={require('./images/square-speech-bubble.png')} alt='speech' />
-            <p>CLICK BELOW TO DRAW FIVE CARDS.</p>
+          <p>CLICK MY MAGICAL GLOWING CARD TO DRAW FIVE CARDS.</p>
           <button onClick={this.drawCards}></button>
         </>
       )
@@ -124,9 +120,7 @@ class App extends Component {
     else {
       return (
         <>
-          <img id='dealer-gif' src={require('./images/all-the-money.gif')} alt='card'/>
-          <img id='speech-bubble' src={require('./images/square-speech-bubble.png')} alt='speech' />
-          <p>YOU'RE OUT OF CARDS! CLICK BELOW TO DEAL A NEW DECK.</p>
+          <p>YOU'RE OUT OF CARDS! CLICK MY MAGICAL GLOWING CARD TO DEAL A NEW DECK.</p>
           <button onClick={this.createDeck}></button>
         </>
       )
@@ -154,10 +148,14 @@ class App extends Component {
   render() {
     return (
       <div id='main-div'>
-        <div id='top-banner'>
-          {this.conditionalAnimationRender()}
+        <div>
+          <img id='dealer-gif' src={require('./images/card-dealer.png')} alt='card'/>
+          <img id='speech-bubble' src={require('./images/square-speech-bubble.png')} alt='speech' />
+        {this.conditionalMessageRender()}
         </div>
-        {this.conditionalCardRender()}
+        <div id='card-table'>
+          {this.conditionalCardRender()}
+        </div>
       </div>
     )
   }
